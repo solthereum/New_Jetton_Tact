@@ -1,6 +1,6 @@
-# 🚚 Jetton Implementation Template by Howard
+# 🚚 5% Commission Jetton
 
-This project is targeting to provide a template for the Jetton Implementation. It's a good start point for the developer to start the Jetton Implementation.
+This is Jetton of 5% commission for pucharge/sale
 
 ### Usage
 
@@ -13,8 +13,6 @@ yarn read # To read contract data from the blockchain
 yarn d1 # (Optional) To Transfer the Jetton Token to the new account
 yarn d2 # (Optional) To generate the Transfer URL to let the new account to transfer the Jetton Token to the other account
 ```
-
-🔍 Detail can be found in `package.json` LOL
 
 # ✨ Important knowledge points
 
@@ -32,13 +30,6 @@ yarn d2 # (Optional) To generate the Transfer URL to let the new account to tran
 -   https://github.com/ton-blockchain/TEPs/blob/master/text/0074-jettons-standard.md
 -   https://docs.ton.org/develop/dapps/asset-processing/jettons
 -   https://docs.tact-lang.org/learn/jetton/jetton-3
-
-## Community
-
--   Tact Lang Community (https://t.me/tactlang)
--   Ton101 (https://t.me/ton101)
--   TON Dev Chat[EN] (https://t.me/tondev_eng)
--   TON Dev 中文 (https://t.me/tondev_zh)
 
 ## Deployment
 
