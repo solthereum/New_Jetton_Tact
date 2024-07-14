@@ -1,3 +1,5 @@
+ode_modules\\@tact-lang\\compiler\\stdlib\\stdlib.fc` `F:\\WorkSpave\\TON\\jetton-implementation-in-tact\
+ode_modules\\@tact-lang\\compiler\\stdlib\\stdlib_ex.fc` `F:/WorkSpave/TON/jetton-implementation-in-tact/sources/output/SampleJetton_SampleJetton.code.fc` incl:`F:/WorkSpave/TON/jetton-implementation-in-tact/sources/output/SampleJetton_SampleJetton.headers.fc` incl:`F:/WorkSpave/TON/jetton-implementation-in-tact/sources/output/SampleJetton_SampleJetton.stdlib.fc` incl:`F:/WorkSpave/TON/jetton-implementation-in-tact/sources/output/SampleJetton_SampleJetton.storage.fc` 
 PROGRAM{
   DECLPROC __tact_verify_address
   DECLPROC __tact_load_address
@@ -311,7 +313,9 @@ PROGRAM{
   $JettonData$_to_external PROCINLINE:<{
   }>
   $JettonDefaultWallet$init$_store PROCINLINE:<{
-    -ROT
+    2SWAP
+    __tact_store_address INLINECALLDICT
+    ROT
     __tact_store_address INLINECALLDICT
     SWAP
     __tact_store_address INLINECALLDICT
@@ -477,7 +481,7 @@ PROGRAM{
     CTOS
   }>
   $JettonDefaultWallet$_init_child PROCREF:<{
-    s0 s2 XCHG
+    s0 s3 XCHG
     CTOS
     LDDICT
     DROP
@@ -499,7 +503,8 @@ PROGRAM{
     FALSE
     SWAP
     1 STI
-    s0 s0 s3 XCHG3
+    3 -ROLL
+    s0 s4 XCHG
     $JettonDefaultWallet$init$_store INLINECALLDICT
     ENDC
   }>
@@ -512,7 +517,7 @@ PROGRAM{
   $SampleJetton$_fun_getJettonWalletInit PROCREF:<{
     __tact_context_sys GETGLOB
     MYADDR
-    s1 s2 XCHG
+    s2 s0 s6 XC2PU
     $JettonDefaultWallet$_init_child INLINECALLDICT
   }>
   $SampleJetton$_fun_mint PROCREF:<{
@@ -569,7 +574,7 @@ PROGRAM{
   $SampleJetton$_fun_get_jetton_data PROCREF:<{
     __tact_context_sys GETGLOB
     MYADDR
-    s5 s(-1) PUXC
+    s5 s(-1) s0 PUXCPU
     $JettonDefaultWallet$_init_child INLINECALLDICT
     $StateInit$_get_code INLINECALLDICT
     s5 s2 s(-2) PU2XC
@@ -579,7 +584,7 @@ PROGRAM{
   $SampleJetton$_fun_get_wallet_address PROCREF:<{
     __tact_context_sys GETGLOB
     MYADDR
-    s1 s2 XCHG
+    s2 s0 s6 XC2PU
     $JettonDefaultWallet$_init_child INLINECALLDICT
     $global_contractAddress INLINECALLDICT
   }>
@@ -711,7 +716,7 @@ PROGRAM{
     THROWANYIFNOT
     __tact_context_sys GETGLOB
     MYADDR
-    s3 s(-1) PUXC
+    s3 s8 s(-1) PU2XC
     $JettonDefaultWallet$_init_child INLINECALLDICT
     s0 s2 XCHG
     IF:<{
@@ -776,12 +781,13 @@ PROGRAM{
     123515602279859691144772641439386770278 PUSHINT
     209801025412363888721030803524359905849 PUSHINT
     42980537499636128163026532310500881091 PUSHINT
+    36993126140238121407019133875791708966 PUSHINT
     209474421377847335869795010607481022628 PUSHINT
     258390863389042349688353801369539695109 PUSHINT
     86142586315491086060343270784266291122 PUSHINT
   }>
   get_abi_ipfs PROC:<{
-    x{697066733a2f2f516d52685865666b77695733426d745058664556314a69314578455a4847375a364e6b367037794a387a4d33426a} PUSHSLICE
+    x{697066733a2f2f516d56764556357950674a3158376a524759645941375268734c7a65386b435669374c3273744b5655414b465573} PUSHSLICE
   }>
   lazy_deployment_completed PROC:<{
     c4 PUSH

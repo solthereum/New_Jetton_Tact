@@ -177,14 +177,15 @@ cell $TakeWalletAddress$_store_cell((int, slice, slice) v) inline {
 ;; Type: JettonDefaultWallet
 ;;
 
-builder $JettonDefaultWallet$init$_store(builder build_0, (slice, slice) v) inline {
-    var (v'owner, v'master) = v;
+builder $JettonDefaultWallet$init$_store(builder build_0, (slice, slice, slice) v) inline {
+    var (v'owner, v'master, v'jetton_owner) = v;
     build_0 = __tact_store_address(build_0, v'owner);
     build_0 = __tact_store_address(build_0, v'master);
+    build_0 = __tact_store_address(build_0, v'jetton_owner);
     return build_0;
 }
 
-(cell, cell) $JettonDefaultWallet$_init_child(cell sys', slice $owner, slice $master) inline_ref {
+(cell, cell) $JettonDefaultWallet$_init_child(cell sys', slice $owner, slice $master, slice $jetton_owner) inline_ref {
     slice sc' = sys'.begin_parse();
     cell source = sc'~load_dict();
     cell contracts = new_dict();
@@ -197,7 +198,7 @@ builder $JettonDefaultWallet$init$_store(builder build_0, (slice, slice) v) inli
     builder b = begin_cell();
     b = b.store_ref(begin_cell().store_dict(contracts).end_cell());
     b = b.store_int(false, 1);
-    b = $JettonDefaultWallet$init$_store(b, ($owner, $master));
+    b = $JettonDefaultWallet$init$_store(b, ($owner, $master, $jetton_owner));
     return (mine, b.end_cell());
 }
 

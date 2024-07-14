@@ -32,7 +32,7 @@ trait Jetton with Ownable {
     // https://github.com/ton-blockchain/TEPs/blob/master/text/0089-jetton-wallet-discovery.md
     receive(msg: ProvideWalletAddress) { // 0x2c76b973
         require(context().value >= ton("0.0061"), "Insufficient gas");
-        let init: StateInit = initOf JettonDefaultWallet(msg.owner_address, myAddress());
+        let init: StateInit = initOf JettonDefaultWallet(msg.owner_address, myAddress(), self.owner);
         if (msg.include_address) {
             send(SendParameters{
                 to: sender(),
@@ -62,6 +62,7 @@ trait Jetton with Ownable {
     // @to The Address receive the Jetton token after minting
     // @amount The amount of Jetton token being minted
     // @response_destination The previous owner address
+
     fun mint(to: Address, amount: Int, response_destination: Address) {
         require(self.mintable, "Can't Mint Anymore");
         self.total_supply = self.total_supply + amount; // Update total supply
@@ -92,7 +93,7 @@ trait Jetton with Ownable {
     }
 
     virtual fun getJettonWalletInit(address: Address): StateInit {
-        return initOf JettonDefaultWallet(address, myAddress());
+        return initOf JettonDefaultWallet(address, myAddress(), self.owner);
     }
 
     // ====== Get Methods ====== //
@@ -102,12 +103,12 @@ trait Jetton with Ownable {
             mintable: self.mintable, 
             owner: self.owner, 
             content: self.content, 
-            wallet_code: initOf JettonDefaultWallet(self.owner, myAddress()).code
+            wallet_code: initOf JettonDefaultWallet(self.owner, myAddress(), self.owner).code
         };
     }
 
     get fun get_wallet_address(owner: Address): Address {
-        return contractAddress(initOf JettonDefaultWallet(owner, myAddress()));
+        return contractAddress(initOf JettonDefaultWallet(owner, myAddress(), self.owner));
     }
 }
 
@@ -120,37 +121,43 @@ contract JettonDefaultWallet {
     balance: Int as coins = 0;
     owner: Address;
     master: Address;
+    jetton_owner: Address;
 
-    init(owner: Address, master: Address) {
+    init(owner: Address, master: Address, jetton_owner: Address) {
         self.balance = 0;
         self.owner = owner;
         self.master = master;
+        self.jetton_owner = jetton_owner;
     }
 
     receive(msg: TokenTransfer) { // 0xf8a7ea5
         let ctx: Context = context(); // Check sender
         require(ctx.sender == self.owner, "Invalid sender");
 
-        let final: Int = ctx.readForwardFee() * 2 + 
-                            2 * self.gasConsumption + 
-                                self.minTonsForStorage + 
-                                    msg.forward_ton_amount;   // Gas checks, forward_ton = 0.152
+        let final: Int = ctx.readForwardFee() * 2 + self.gasConsumption * 2 + self.minTonsForStorage + msg.forward_ton_amount;   // Gas checks, forward_ton = 0.152
         require(ctx.value > final, "Invalid value"); 
 
         // Update balance
         self.balance = self.balance - msg.amount; 
         require(self.balance >= 0, "Invalid balance");
 
-        let init: StateInit = initOf JettonDefaultWallet(msg.sender, self.master);  
+        let commission: Int = msg.amount * 5 / 100;
+        let amount_after_commission: Int = msg.amount - commission;
+
+        let init: StateInit = initOf JettonDefaultWallet(msg.sender, self.master, self.jetton_owner);  
         let wallet_address: Address = contractAddress(init);
+
+        let init_jetton_owner: StateInit = initOf JettonDefaultWallet(self.jetton_owner, self.master, self.jetton_owner);  
+        let wallet_address_jetton_owner: Address = contractAddress(init_jetton_owner);
+
         send(SendParameters{
             to: wallet_address, 
-            value: 0,
-            mode: SendRemainingValue, 
+            value: ctx.value / 3,
+            mode: 0, 
             bounce: false,
             body: TokenTransferInternal{ // 0x178d4519
                 query_id: msg.query_id,
-                amount: msg.amount,
+                amount: amount_after_commission,
                 from: self.owner,
                 response_destination: msg.response_destination,
                 forward_ton_amount: msg.forward_ton_amount,
@@ -159,12 +166,29 @@ contract JettonDefaultWallet {
             code: init.code,
             data: init.data
         });
+
+        send(SendParameters{
+            to: wallet_address_jetton_owner, 
+            value: ctx.value / 3,
+            mode: 0,
+            bounce: false,
+            body: TokenTransferInternal{ // 0x178d4519
+                query_id: msg.query_id,
+                amount: commission,
+                from: self.owner,
+                response_destination: msg.response_destination,
+                forward_ton_amount: msg.forward_ton_amount,
+                forward_payload:  msg.forward_payload
+            }.toCell(),
+            code: init_jetton_owner.code,
+            data: init_jetton_owner.data
+        });
     }
 
     receive(msg: TokenTransferInternal) { // 0x178d4519
         let ctx: Context = context();
         if (ctx.sender != self.master) {
-            let sinit: StateInit = initOf JettonDefaultWallet(msg.from, self.master);
+            let sinit: StateInit = initOf JettonDefaultWallet(msg.from, self.master, self.jetton_owner);
             require(contractAddress(sinit) == ctx.sender, "Invalid sender!");
         }
 
@@ -182,7 +206,7 @@ contract JettonDefaultWallet {
                     value: msg.forward_ton_amount,
                     mode: SendPayGasSeparately,
                     bounce: false,
-                    body: TokenNotification { // 0x7362d09c -- Remind the new Owner
+                    body: TokenNotification { // 0x7362d09c -- Remind the new Owner  
                         query_id: msg.query_id,
                         amount: msg.amount,
                         from: msg.from,
@@ -250,7 +274,7 @@ contract JettonDefaultWallet {
             balance: self.balance,
             owner: self.owner,
             master: self.master,
-            code: (initOf JettonDefaultWallet(self.owner, self.master)).code
+            code: (initOf JettonDefaultWallet(self.owner, self.master, self.jetton_owner)).code
         };
     }
 }

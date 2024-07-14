@@ -10,7 +10,7 @@ import * as dotenv from "dotenv";
 dotenv.config();
 
 (async () => {
-    //create client for testnet sandboxv4 API - alternative endpoint
+    // create client for testnet sandboxv4 API - alternative endpoint
     const client4 = new TonClient4({
         // endpoint: "https://sandbox-v4.tonhubapi.com",
         endpoint: "https://mainnet-v4.tonhubapi.com",
@@ -26,10 +26,10 @@ dotenv.config();
     let deployer_wallet_contract = client4.open(deployer_wallet);
 
     const jettonParams = {
-        name: "XXXXXX Name",
-        description: "This is description of Test Jetton Token in Tact-lang",
-        symbol: "XXXXXXXXX",
-        image: "https://avatars.githubusercontent.com/u/104382459?s=200&v=4",
+        name: "PYTHON JETTON",
+        description: "This is jetton of 5% commission to jetton owner",
+        symbol: "PYTON",
+        image: "https://gateway.pinata.cloud/ipfs/QmdKpdkk4YgJnrruQVi7C6ocBAzZ1P3N5ZcRbjXihJYDeq",
     };
 
     // Create content Cell
@@ -54,7 +54,7 @@ dotenv.config();
         )
         .endCell();
 
-    // send a message on new address contract to deploy it
+    // // send a message on new address contract to deploy it
     let seqno: number = await deployer_wallet_contract.getSeqno();
     console.log("🛠️Preparing new outgoing massage from deployment wallet. \n" + deployer_wallet_contract.address);
     console.log("Seqno: ", seqno + "\n");

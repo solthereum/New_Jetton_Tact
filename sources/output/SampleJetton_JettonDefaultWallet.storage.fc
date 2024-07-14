@@ -196,35 +196,39 @@ cell $TokenExcesses$_store_cell((int) v) inline {
 ;; Type: JettonDefaultWallet
 ;;
 
-builder $JettonDefaultWallet$_store(builder build_0, (int, slice, slice) v) inline {
-    var (v'balance, v'owner, v'master) = v;
+builder $JettonDefaultWallet$_store(builder build_0, (int, slice, slice, slice) v) inline {
+    var (v'balance, v'owner, v'master, v'jetton_owner) = v;
     build_0 = build_0.store_coins(v'balance);
     build_0 = __tact_store_address(build_0, v'owner);
     build_0 = __tact_store_address(build_0, v'master);
+    build_0 = __tact_store_address(build_0, v'jetton_owner);
     return build_0;
 }
 
-(slice, ((int, slice, slice))) $JettonDefaultWallet$_load(slice sc_0) inline {
+(slice, ((int, slice, slice, slice))) $JettonDefaultWallet$_load(slice sc_0) inline {
     var v'balance = sc_0~load_coins();
     var v'owner = sc_0~__tact_load_address();
     var v'master = sc_0~__tact_load_address();
-    return (sc_0, (v'balance, v'owner, v'master));
+    var v'jetton_owner = sc_0~__tact_load_address();
+    return (sc_0, (v'balance, v'owner, v'master, v'jetton_owner));
 }
 
-builder $JettonDefaultWallet$init$_store(builder build_0, (slice, slice) v) inline {
-    var (v'owner, v'master) = v;
+builder $JettonDefaultWallet$init$_store(builder build_0, (slice, slice, slice) v) inline {
+    var (v'owner, v'master, v'jetton_owner) = v;
     build_0 = __tact_store_address(build_0, v'owner);
     build_0 = __tact_store_address(build_0, v'master);
+    build_0 = __tact_store_address(build_0, v'jetton_owner);
     return build_0;
 }
 
-(slice, ((slice, slice))) $JettonDefaultWallet$init$_load(slice sc_0) inline {
+(slice, ((slice, slice, slice))) $JettonDefaultWallet$init$_load(slice sc_0) inline {
     var v'owner = sc_0~__tact_load_address();
     var v'master = sc_0~__tact_load_address();
-    return (sc_0, (v'owner, v'master));
+    var v'jetton_owner = sc_0~__tact_load_address();
+    return (sc_0, (v'owner, v'master, v'jetton_owner));
 }
 
-(int, slice, slice) $JettonDefaultWallet$_contract_load() impure inline_ref {
+(int, slice, slice, slice) $JettonDefaultWallet$_contract_load() impure inline_ref {
     slice $sc = get_data().begin_parse();
     __tact_context_sys = $sc~load_ref();
     int $loaded = $sc~load_int(1);
@@ -233,13 +237,13 @@ builder $JettonDefaultWallet$init$_store(builder build_0, (slice, slice) v) inli
     } else {
         ;; Allow only workchain deployments
         throw_unless(137, my_address().preload_uint(11) == 1024);
-        (slice owner, slice master) = $sc~$JettonDefaultWallet$init$_load();
+        (slice owner, slice master, slice jetton_owner) = $sc~$JettonDefaultWallet$init$_load();
         $sc.end_parse();
-        return $JettonDefaultWallet$_contract_init(owner, master);
+        return $JettonDefaultWallet$_contract_init(owner, master, jetton_owner);
     }
 }
 
-() $JettonDefaultWallet$_contract_store((int, slice, slice) v) impure inline {
+() $JettonDefaultWallet$_contract_store((int, slice, slice, slice) v) impure inline {
     builder b = begin_cell();
     b = b.store_ref(__tact_context_sys);
     b = b.store_int(true, 1);
@@ -247,7 +251,7 @@ builder $JettonDefaultWallet$init$_store(builder build_0, (slice, slice) v) inli
     set_data(b.end_cell());
 }
 
-(cell, cell) $JettonDefaultWallet$_init_child(cell sys', slice $owner, slice $master) inline_ref {
+(cell, cell) $JettonDefaultWallet$_init_child(cell sys', slice $owner, slice $master, slice $jetton_owner) inline_ref {
     slice sc' = sys'.begin_parse();
     cell source = sc'~load_dict();
     cell contracts = new_dict();
@@ -260,6 +264,6 @@ builder $JettonDefaultWallet$init$_store(builder build_0, (slice, slice) v) inli
     builder b = begin_cell();
     b = b.store_ref(begin_cell().store_dict(contracts).end_cell());
     b = b.store_int(false, 1);
-    b = $JettonDefaultWallet$init$_store(b, ($owner, $master));
+    b = $JettonDefaultWallet$init$_store(b, ($owner, $master, $jetton_owner));
     return (mine, b.end_cell());
 }
