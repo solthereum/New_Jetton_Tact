@@ -1,4 +1,4 @@
-#pragma version =0.4.3;
+#pragma version =0.4.4;
 #pragma allow-post-modification;
 #pragma compute-asm-ltr;
 
@@ -163,7 +163,7 @@ _ supported_interfaces() method_id {
 }
 
 _ get_abi_ipfs() method_id {
-    return "ipfs://QmVvEV5yPgJ1X7jRGYdYA7RhsLze8kCVi7L2stKVUAKFUs";
+    return "ipfs://QmfGdPZdNb7uKFpbsabeN87hx6FwfGZDhEatczKyJ9CLf1";
 }
 
 _ lazy_deployment_completed() method_id {

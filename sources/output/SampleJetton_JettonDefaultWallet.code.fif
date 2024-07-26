@@ -1,5 +1,5 @@
-ode_modules\\@tact-lang\\compiler\\stdlib\\stdlib.fc` `F:\\WorkSpave\\TON\\jetton-implementation-in-tact\
-ode_modules\\@tact-lang\\compiler\\stdlib\\stdlib_ex.fc` `F:/WorkSpave/TON/jetton-implementation-in-tact/sources/output/SampleJetton_JettonDefaultWallet.code.fc` incl:`F:/WorkSpave/TON/jetton-implementation-in-tact/sources/output/SampleJetton_JettonDefaultWallet.headers.fc` incl:`F:/WorkSpave/TON/jetton-implementation-in-tact/sources/output/SampleJetton_JettonDefaultWallet.stdlib.fc` incl:`F:/WorkSpave/TON/jetton-implementation-in-tact/sources/output/SampleJetton_JettonDefaultWallet.storage.fc` 
+ode_modules\@tact-lang\compiler\stdlib\stdlib.fc` `F:\WorkSpave\TON\jetton-implementation-in-tact
+ode_modules\@tact-lang\compiler\stdlib\stdlib_ex.fc` `F:/WorkSpave/TON/jetton-implementation-in-tact/sources/output/SampleJetton_JettonDefaultWallet.code.fc` incl:`F:/WorkSpave/TON/jetton-implementation-in-tact/sources/output/SampleJetton_JettonDefaultWallet.headers.fc` incl:`F:/WorkSpave/TON/jetton-implementation-in-tact/sources/output/SampleJetton_JettonDefaultWallet.stdlib.fc` incl:`F:/WorkSpave/TON/jetton-implementation-in-tact/sources/output/SampleJetton_JettonDefaultWallet.storage.fc` 
 PROGRAM{
   DECLPROC __tact_verify_address
   DECLPROC __tact_load_address
@@ -88,15 +88,16 @@ PROGRAM{
     __tact_verify_address INLINECALLDICT
   }>
   __tact_load_address_opt PROCINLINE:<{
-    LDMSGADDR
-    OVER
+    DUP
     2 PLDU
     0 NEQINT
     IF:<{
+      LDMSGADDR
       SWAP
       __tact_verify_address INLINECALLDICT
     }>ELSE<{
-      NIP
+      2 PUSHINT
+      SDSKIPFIRST
       PUSHNULL
     }>
   }>
@@ -664,7 +665,8 @@ PROGRAM{
     2DUP
     $global_contractAddress INLINECALLDICT
     16 s() PUSH
-    3 PUSHINT
+    1 LSHIFT#
+    5 PUSHINT
     DIV
     0 PUSHINT
     s14 PUSH
@@ -680,7 +682,8 @@ PROGRAM{
     $SendParameters$_constructor_to_value_mode_bounce_body_code_data INLINECALLDICT
     $global_send INLINECALLDICT
     s0 s12 XCHG
-    3 PUSHINT
+    1 LSHIFT#
+    5 PUSHINT
     DIV
     s8 s7 s0 XCHG3
     0 PUSHINT
@@ -843,7 +846,7 @@ PROGRAM{
     209778528950190195973528115415557644819 PUSHINT
   }>
   get_abi_ipfs PROC:<{
-    x{697066733a2f2f516d5a6f325a77574c5656446131316e5073416152524a687162575a3241344b656367436f35685978705638464a} PUSHSLICE
+    x{697066733a2f2f516d595558785235336634504e5243664c38654669583866626f3543505a794c3939786277614e785131534b4270} PUSHSLICE
   }>
   lazy_deployment_completed PROC:<{
     c4 PUSH

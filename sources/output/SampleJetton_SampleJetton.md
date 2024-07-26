@@ -1,6 +1,6 @@
 # TACT Compilation Report
 Contract: SampleJetton
-BOC Size: 2274 bytes
+BOC Size: 2276 bytes
 
 # Types
 Total Types: 17
@@ -84,7 +84,7 @@ Argument: owner
 ## owner
 
 # Error Codes
-2: Stack undeflow
+2: Stack underflow
 3: Stack overflow
 4: Integer overflow
 5: Integer out of expected range

@@ -1,4 +1,4 @@
-#pragma version =0.4.3;
+#pragma version =0.4.4;
 #pragma allow-post-modification;
 #pragma compute-asm-ltr;
 
@@ -42,7 +42,7 @@
     var ($msg'query_id, $msg'amount, $msg'sender, $msg'response_destination, $msg'custom_payload, $msg'forward_ton_amount, $msg'forward_payload) = $msg;
     var ($ctx'bounced, $ctx'sender, $ctx'value, $ctx'raw) = __tact_context_get();
     throw_unless(4429, ( __tact_slice_eq_bits($self'owner, $ctx'sender) ));
-    int $final = (((($Context$_fun_readForwardFee(($ctx'bounced, $ctx'sender, $ctx'value, $ctx'raw)) * 2) + (13000000 * 2)) + 19000000) + $msg'forward_ton_amount);
+    int $final = (((($Context$_fun_readForwardFee(($ctx'bounced, $ctx'sender, $ctx'value, $ctx'raw)) * 2) + 26000000) + 19000000) + $msg'forward_ton_amount);
     throw_unless(16059, ($ctx'value > $final));
     $self'balance = ($self'balance - $msg'amount);
     throw_unless(62972, ($self'balance >= 0));
@@ -52,8 +52,8 @@
     slice $wallet_address = $global_contractAddress(($init'code, $init'data));
     var ($init_jetton_owner'code, $init_jetton_owner'data) = $JettonDefaultWallet$_init_child(__tact_context_sys, $self'jetton_owner, $self'master, $self'jetton_owner);
     slice $wallet_address_jetton_owner = $global_contractAddress(($init_jetton_owner'code, $init_jetton_owner'data));
-    $global_send($SendParameters$_constructor_to_value_mode_bounce_body_code_data($wallet_address, ($ctx'value / 3), 0, false, $TokenTransferInternal$_store_cell($TokenTransferInternal$_constructor_query_id_amount_from_response_destination_forward_ton_amount_forward_payload($msg'query_id, $amount_after_commission, $self'owner, $msg'response_destination, $msg'forward_ton_amount, $msg'forward_payload)), $init'code, $init'data));
-    $global_send($SendParameters$_constructor_to_value_mode_bounce_body_code_data($wallet_address_jetton_owner, ($ctx'value / 3), 0, false, $TokenTransferInternal$_store_cell($TokenTransferInternal$_constructor_query_id_amount_from_response_destination_forward_ton_amount_forward_payload($msg'query_id, $commission, $self'owner, $msg'response_destination, $msg'forward_ton_amount, $msg'forward_payload)), $init_jetton_owner'code, $init_jetton_owner'data));
+    $global_send($SendParameters$_constructor_to_value_mode_bounce_body_code_data($wallet_address, (($ctx'value * 2) / 5), 0, false, $TokenTransferInternal$_store_cell($TokenTransferInternal$_constructor_query_id_amount_from_response_destination_forward_ton_amount_forward_payload($msg'query_id, $amount_after_commission, $self'owner, $msg'response_destination, $msg'forward_ton_amount, $msg'forward_payload)), $init'code, $init'data));
+    $global_send($SendParameters$_constructor_to_value_mode_bounce_body_code_data($wallet_address_jetton_owner, (($ctx'value * 2) / 5), 0, false, $TokenTransferInternal$_store_cell($TokenTransferInternal$_constructor_query_id_amount_from_response_destination_forward_ton_amount_forward_payload($msg'query_id, $commission, $self'owner, $msg'response_destination, $msg'forward_ton_amount, $msg'forward_payload)), $init_jetton_owner'code, $init_jetton_owner'data));
     return (($self'balance, $self'owner, $self'master, $self'jetton_owner), ());
 }
 
@@ -87,7 +87,7 @@
     $self'balance = ($self'balance - $msg'amount);
     throw_unless(62972, ($self'balance >= 0));
     int $fwd_fee = $Context$_fun_readForwardFee(($ctx'bounced, $ctx'sender, $ctx'value, $ctx'raw));
-    throw_unless(43422, ($ctx'value > (($fwd_fee + (2 * 13000000)) + 19000000)));
+    throw_unless(43422, ($ctx'value > (($fwd_fee + 26000000) + 19000000)));
     $global_send($SendParameters$_constructor_to_value_mode_bounce_body($self'master, 0, 64, true, $TokenBurnNotification$_store_cell($TokenBurnNotification$_constructor_query_id_amount_sender_response_destination($msg'query_id, $msg'amount, $self'owner, __tact_not_null($msg'response_destination)))));
     return (($self'balance, $self'owner, $self'master, $self'jetton_owner), ());
 }
@@ -128,7 +128,7 @@ _ supported_interfaces() method_id {
 }
 
 _ get_abi_ipfs() method_id {
-    return "ipfs://QmZo2ZwWLVVDa11nPsAaRRJhqbWZ2A4KecgCo5hYxpV8FJ";
+    return "ipfs://QmYUXxR53f4PNRCfL8eFiX8fbo5CPZyL99xbwaNxQ1SKBp";
 }
 
 _ lazy_deployment_completed() method_id {

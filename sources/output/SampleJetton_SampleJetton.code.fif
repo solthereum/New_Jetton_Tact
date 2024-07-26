@@ -1,5 +1,5 @@
-ode_modules\\@tact-lang\\compiler\\stdlib\\stdlib.fc` `F:\\WorkSpave\\TON\\jetton-implementation-in-tact\
-ode_modules\\@tact-lang\\compiler\\stdlib\\stdlib_ex.fc` `F:/WorkSpave/TON/jetton-implementation-in-tact/sources/output/SampleJetton_SampleJetton.code.fc` incl:`F:/WorkSpave/TON/jetton-implementation-in-tact/sources/output/SampleJetton_SampleJetton.headers.fc` incl:`F:/WorkSpave/TON/jetton-implementation-in-tact/sources/output/SampleJetton_SampleJetton.stdlib.fc` incl:`F:/WorkSpave/TON/jetton-implementation-in-tact/sources/output/SampleJetton_SampleJetton.storage.fc` 
+ode_modules\@tact-lang\compiler\stdlib\stdlib.fc` `F:\WorkSpave\TON\jetton-implementation-in-tact
+ode_modules\@tact-lang\compiler\stdlib\stdlib_ex.fc` `F:/WorkSpave/TON/jetton-implementation-in-tact/sources/output/SampleJetton_SampleJetton.code.fc` incl:`F:/WorkSpave/TON/jetton-implementation-in-tact/sources/output/SampleJetton_SampleJetton.headers.fc` incl:`F:/WorkSpave/TON/jetton-implementation-in-tact/sources/output/SampleJetton_SampleJetton.stdlib.fc` incl:`F:/WorkSpave/TON/jetton-implementation-in-tact/sources/output/SampleJetton_SampleJetton.storage.fc` 
 PROGRAM{
   DECLPROC __tact_verify_address
   DECLPROC __tact_load_address
@@ -93,15 +93,16 @@ PROGRAM{
     __tact_verify_address INLINECALLDICT
   }>
   __tact_load_address_opt PROCINLINE:<{
-    LDMSGADDR
-    OVER
+    DUP
     2 PLDU
     0 NEQINT
     IF:<{
+      LDMSGADDR
       SWAP
       __tact_verify_address INLINECALLDICT
     }>ELSE<{
-      NIP
+      2 PUSHINT
+      SDSKIPFIRST
       PUSHNULL
     }>
   }>
@@ -787,7 +788,7 @@ PROGRAM{
     86142586315491086060343270784266291122 PUSHINT
   }>
   get_abi_ipfs PROC:<{
-    x{697066733a2f2f516d56764556357950674a3158376a524759645941375268734c7a65386b435669374c3273744b5655414b465573} PUSHSLICE
+    x{697066733a2f2f516d664764505a644e6237754b467062736162654e3837687836467766475a4468456174637a4b794a39434c6631} PUSHSLICE
   }>
   lazy_deployment_completed PROC:<{
     c4 PUSH

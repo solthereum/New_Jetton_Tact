@@ -32,7 +32,7 @@ import {
 
 // ------------ STON.fi SDK ------------
 import TonWeb from "tonweb";
-import { Router, ROUTER_REVISION, ROUTER_REVISION_ADDRESS } from "@ston-fi/sdk";
+import { DEX, pTON } from "@ston-fi/sdk";
 
 const jettonParams = {
     name: "Best Practice",
@@ -74,10 +74,10 @@ describe("contract", () => {
 
     // it("Test: whether contract deployed successfully", async () => {
     //     // the check is done inside beforeEach, blockchain and token are ready to use
-    //     // console.log((await token.getGetJettonData()).owner);
-    //     // console.log((await token.getGetJettonData()).totalSupply);
+    //     console.log((await token.getGetJettonData()).owner);
+    //     console.log((await token.getGetJettonData()).total_supply);
     //     // console.log((await token.getGetJettonData()).max_supply);
-    //     // console.log((await token.getGetJettonData()).content);
+    //     console.log((await token.getGetJettonData()).content);
     // });
 
     it("Test: Minting is successfully", async () => {
@@ -476,5 +476,4 @@ describe("contract", () => {
 //     if (lpAccount) {
 //         expect(lpAccountData).toBeDefined();
 //     }
-// });
 // });

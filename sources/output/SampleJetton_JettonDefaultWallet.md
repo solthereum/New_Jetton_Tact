@@ -1,6 +1,6 @@
 # TACT Compilation Report
 Contract: JettonDefaultWallet
-BOC Size: 2393 bytes
+BOC Size: 2403 bytes
 
 # Types
 Total Types: 17
@@ -79,7 +79,7 @@ Total Get Methods: 1
 ## get_wallet_data
 
 # Error Codes
-2: Stack undeflow
+2: Stack underflow
 3: Stack overflow
 4: Integer overflow
 5: Integer out of expected range

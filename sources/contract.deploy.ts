@@ -12,8 +12,8 @@ dotenv.config();
 (async () => {
     // create client for testnet sandboxv4 API - alternative endpoint
     const client4 = new TonClient4({
-        // endpoint: "https://sandbox-v4.tonhubapi.com",
-        endpoint: "https://mainnet-v4.tonhubapi.com",
+        endpoint: "https://sandbox-v4.tonhubapi.com",
+        // endpoint: "https://mainnet-v4.tonhubapi.com",
     });
 
     let mnemonics = (process.env.mnemonics_2 || "").toString(); // 🔴 Change to your own, by creating .env file!
@@ -26,9 +26,9 @@ dotenv.config();
     let deployer_wallet_contract = client4.open(deployer_wallet);
 
     const jettonParams = {
-        name: "PYTHON JETTON",
+        name: "JET",
         description: "This is jetton of 5% commission to jetton owner",
-        symbol: "PYTON",
+        symbol: "PTON",
         image: "https://gateway.pinata.cloud/ipfs/QmdKpdkk4YgJnrruQVi7C6ocBAzZ1P3N5ZcRbjXihJYDeq",
     };
 

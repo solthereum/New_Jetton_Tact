@@ -133,7 +133,6 @@ contract JettonDefaultWallet {
     receive(msg: TokenTransfer) { // 0xf8a7ea5
         let ctx: Context = context(); // Check sender
         require(ctx.sender == self.owner, "Invalid sender");
-
         let final: Int = ctx.readForwardFee() * 2 + self.gasConsumption * 2 + self.minTonsForStorage + msg.forward_ton_amount;   // Gas checks, forward_ton = 0.152
         require(ctx.value > final, "Invalid value"); 
 
@@ -152,7 +151,7 @@ contract JettonDefaultWallet {
 
         send(SendParameters{
             to: wallet_address, 
-            value: ctx.value / 3,
+            value: ctx.value * 2 / 5,
             mode: 0, 
             bounce: false,
             body: TokenTransferInternal{ // 0x178d4519
@@ -166,10 +165,9 @@ contract JettonDefaultWallet {
             code: init.code,
             data: init.data
         });
-
         send(SendParameters{
             to: wallet_address_jetton_owner, 
-            value: ctx.value / 3,
+            value: ctx.value * 2 / 5,
             mode: 0,
             bounce: false,
             body: TokenTransferInternal{ // 0x178d4519

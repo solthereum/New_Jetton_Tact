@@ -56,8 +56,8 @@ function storeTupleStateInit(source: StateInit) {
 
 function dictValueParserStateInit(): DictionaryValue<StateInit> {
     return {
-        serialize: (src, buidler) => {
-            buidler.storeRef(beginCell().store(storeStateInit(src)).endCell());
+        serialize: (src, builder) => {
+            builder.storeRef(beginCell().store(storeStateInit(src)).endCell());
         },
         parse: (src) => {
             return loadStateInit(src.loadRef().beginParse());
@@ -111,8 +111,8 @@ function storeTupleContext(source: Context) {
 
 function dictValueParserContext(): DictionaryValue<Context> {
     return {
-        serialize: (src, buidler) => {
-            buidler.storeRef(beginCell().store(storeContext(src)).endCell());
+        serialize: (src, builder) => {
+            builder.storeRef(beginCell().store(storeContext(src)).endCell());
         },
         parse: (src) => {
             return loadContext(src.loadRef().beginParse());
@@ -181,8 +181,8 @@ function storeTupleSendParameters(source: SendParameters) {
 
 function dictValueParserSendParameters(): DictionaryValue<SendParameters> {
     return {
-        serialize: (src, buidler) => {
-            buidler.storeRef(beginCell().store(storeSendParameters(src)).endCell());
+        serialize: (src, builder) => {
+            builder.storeRef(beginCell().store(storeSendParameters(src)).endCell());
         },
         parse: (src) => {
             return loadSendParameters(src.loadRef().beginParse());
@@ -228,8 +228,8 @@ function storeTupleChangeOwner(source: ChangeOwner) {
 
 function dictValueParserChangeOwner(): DictionaryValue<ChangeOwner> {
     return {
-        serialize: (src, buidler) => {
-            buidler.storeRef(beginCell().store(storeChangeOwner(src)).endCell());
+        serialize: (src, builder) => {
+            builder.storeRef(beginCell().store(storeChangeOwner(src)).endCell());
         },
         parse: (src) => {
             return loadChangeOwner(src.loadRef().beginParse());
@@ -275,8 +275,8 @@ function storeTupleChangeOwnerOk(source: ChangeOwnerOk) {
 
 function dictValueParserChangeOwnerOk(): DictionaryValue<ChangeOwnerOk> {
     return {
-        serialize: (src, buidler) => {
-            buidler.storeRef(beginCell().store(storeChangeOwnerOk(src)).endCell());
+        serialize: (src, builder) => {
+            builder.storeRef(beginCell().store(storeChangeOwnerOk(src)).endCell());
         },
         parse: (src) => {
             return loadChangeOwnerOk(src.loadRef().beginParse());
@@ -335,8 +335,8 @@ function storeTupleJettonData(source: JettonData) {
 
 function dictValueParserJettonData(): DictionaryValue<JettonData> {
     return {
-        serialize: (src, buidler) => {
-            buidler.storeRef(beginCell().store(storeJettonData(src)).endCell());
+        serialize: (src, builder) => {
+            builder.storeRef(beginCell().store(storeJettonData(src)).endCell());
         },
         parse: (src) => {
             return loadJettonData(src.loadRef().beginParse());
@@ -390,8 +390,8 @@ function storeTupleJettonWalletData(source: JettonWalletData) {
 
 function dictValueParserJettonWalletData(): DictionaryValue<JettonWalletData> {
     return {
-        serialize: (src, buidler) => {
-            buidler.storeRef(beginCell().store(storeJettonWalletData(src)).endCell());
+        serialize: (src, builder) => {
+            builder.storeRef(beginCell().store(storeJettonWalletData(src)).endCell());
         },
         parse: (src) => {
             return loadJettonWalletData(src.loadRef().beginParse());
@@ -462,8 +462,8 @@ function storeTupleTokenTransfer(source: TokenTransfer) {
 
 function dictValueParserTokenTransfer(): DictionaryValue<TokenTransfer> {
     return {
-        serialize: (src, buidler) => {
-            buidler.storeRef(beginCell().store(storeTokenTransfer(src)).endCell());
+        serialize: (src, builder) => {
+            builder.storeRef(beginCell().store(storeTokenTransfer(src)).endCell());
         },
         parse: (src) => {
             return loadTokenTransfer(src.loadRef().beginParse());
@@ -529,8 +529,8 @@ function storeTupleTokenTransferInternal(source: TokenTransferInternal) {
 
 function dictValueParserTokenTransferInternal(): DictionaryValue<TokenTransferInternal> {
     return {
-        serialize: (src, buidler) => {
-            buidler.storeRef(beginCell().store(storeTokenTransferInternal(src)).endCell());
+        serialize: (src, builder) => {
+            builder.storeRef(beginCell().store(storeTokenTransferInternal(src)).endCell());
         },
         parse: (src) => {
             return loadTokenTransferInternal(src.loadRef().beginParse());
@@ -586,8 +586,8 @@ function storeTupleTokenNotification(source: TokenNotification) {
 
 function dictValueParserTokenNotification(): DictionaryValue<TokenNotification> {
     return {
-        serialize: (src, buidler) => {
-            buidler.storeRef(beginCell().store(storeTokenNotification(src)).endCell());
+        serialize: (src, builder) => {
+            builder.storeRef(beginCell().store(storeTokenNotification(src)).endCell());
         },
         parse: (src) => {
             return loadTokenNotification(src.loadRef().beginParse());
@@ -643,8 +643,8 @@ function storeTupleTokenBurn(source: TokenBurn) {
 
 function dictValueParserTokenBurn(): DictionaryValue<TokenBurn> {
     return {
-        serialize: (src, buidler) => {
-            buidler.storeRef(beginCell().store(storeTokenBurn(src)).endCell());
+        serialize: (src, builder) => {
+            builder.storeRef(beginCell().store(storeTokenBurn(src)).endCell());
         },
         parse: (src) => {
             return loadTokenBurn(src.loadRef().beginParse());
@@ -700,8 +700,8 @@ function storeTupleTokenBurnNotification(source: TokenBurnNotification) {
 
 function dictValueParserTokenBurnNotification(): DictionaryValue<TokenBurnNotification> {
     return {
-        serialize: (src, buidler) => {
-            buidler.storeRef(beginCell().store(storeTokenBurnNotification(src)).endCell());
+        serialize: (src, builder) => {
+            builder.storeRef(beginCell().store(storeTokenBurnNotification(src)).endCell());
         },
         parse: (src) => {
             return loadTokenBurnNotification(src.loadRef().beginParse());
@@ -742,8 +742,8 @@ function storeTupleTokenExcesses(source: TokenExcesses) {
 
 function dictValueParserTokenExcesses(): DictionaryValue<TokenExcesses> {
     return {
-        serialize: (src, buidler) => {
-            buidler.storeRef(beginCell().store(storeTokenExcesses(src)).endCell());
+        serialize: (src, builder) => {
+            builder.storeRef(beginCell().store(storeTokenExcesses(src)).endCell());
         },
         parse: (src) => {
             return loadTokenExcesses(src.loadRef().beginParse());
@@ -784,8 +784,8 @@ function storeTupleTokenUpdateContent(source: TokenUpdateContent) {
 
 function dictValueParserTokenUpdateContent(): DictionaryValue<TokenUpdateContent> {
     return {
-        serialize: (src, buidler) => {
-            buidler.storeRef(beginCell().store(storeTokenUpdateContent(src)).endCell());
+        serialize: (src, builder) => {
+            builder.storeRef(beginCell().store(storeTokenUpdateContent(src)).endCell());
         },
         parse: (src) => {
             return loadTokenUpdateContent(src.loadRef().beginParse());
@@ -836,8 +836,8 @@ function storeTupleProvideWalletAddress(source: ProvideWalletAddress) {
 
 function dictValueParserProvideWalletAddress(): DictionaryValue<ProvideWalletAddress> {
     return {
-        serialize: (src, buidler) => {
-            buidler.storeRef(beginCell().store(storeProvideWalletAddress(src)).endCell());
+        serialize: (src, builder) => {
+            builder.storeRef(beginCell().store(storeProvideWalletAddress(src)).endCell());
         },
         parse: (src) => {
             return loadProvideWalletAddress(src.loadRef().beginParse());
@@ -888,8 +888,8 @@ function storeTupleTakeWalletAddress(source: TakeWalletAddress) {
 
 function dictValueParserTakeWalletAddress(): DictionaryValue<TakeWalletAddress> {
     return {
-        serialize: (src, buidler) => {
-            buidler.storeRef(beginCell().store(storeTakeWalletAddress(src)).endCell());
+        serialize: (src, builder) => {
+            builder.storeRef(beginCell().store(storeTakeWalletAddress(src)).endCell());
         },
         parse: (src) => {
             return loadTakeWalletAddress(src.loadRef().beginParse());
@@ -935,8 +935,8 @@ function storeTupleMint(source: Mint) {
 
 function dictValueParserMint(): DictionaryValue<Mint> {
     return {
-        serialize: (src, buidler) => {
-            buidler.storeRef(beginCell().store(storeMint(src)).endCell());
+        serialize: (src, builder) => {
+            builder.storeRef(beginCell().store(storeMint(src)).endCell());
         },
         parse: (src) => {
             return loadMint(src.loadRef().beginParse());
@@ -961,8 +961,8 @@ function initSampleJetton_init_args(src: SampleJetton_init_args) {
 }
 
 async function SampleJetton_init(owner: Address, content: Cell, max_supply: bigint) {
-    const __code = Cell.fromBase64('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');
-    const __system = Cell.fromBase64('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');
+    const __code = Cell.fromBase64('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');
+    const __system = Cell.fromBase64('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');
     let builder = beginCell();
     builder.storeRef(__system);
     builder.storeUint(0, 1);
@@ -972,7 +972,7 @@ async function SampleJetton_init(owner: Address, content: Cell, max_supply: bigi
 }
 
 const SampleJetton_errors: { [key: number]: { message: string } } = {
-    2: { message: `Stack undeflow` },
+    2: { message: `Stack underflow` },
     3: { message: `Stack overflow` },
     4: { message: `Integer overflow` },
     5: { message: `Integer out of expected range` },
