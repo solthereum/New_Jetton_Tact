@@ -16,8 +16,6 @@ yarn d2 # (Optional) To generate the Transfer URL to let the new account to tran
 
 # ✨ Important knowledge points
 
-![image1.png](./image1.png)
-
 -   Store the Jetton content in the `Cell` data type.
 -   Use lowercase for the name in `get_jetton_data()` as per [TEP-74](https://github.com/ton-blockchain/TEPs/blob/master/text/0074-jettons-standard.md). Otherwise, major explorers won't be able to read the Jetton information correctly.
 -   The `max_supply` parameter is optional. You can choose to use it or not. Regardless, the Explorer will only track the `Total Supply` in the Jetton Root Contract.
@@ -37,7 +35,9 @@ To deploy contract you should:
 
 1. Specify `contract.tact` that will be used as entry point of your contract
 2. Configure `contract.deploy.ts` according to your `contract.tact` to generate a deployment link. In particular, it is necessary to correctly call the Init() function from the contract.
-
+In here, set your specified content for Jetton in jettonParams variable of `contract.deploy.ts`.
+And replace `fee_destination` variable with your address in `jetton.tact`.
+When add/remove liquidity pair with this jetton, or purchase/sell this jetton from Ston.fi Dex pool, 5% of jetton amount will be transferred to `fee_destination` address.
 
 If you renamed `contract.tact` to something else, you need to update `tact.config.json` correspondingly. For more information , see [Tact Documentation](https://docs.tact-lang.org/language/guides/config)
 
