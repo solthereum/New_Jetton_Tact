@@ -314,9 +314,7 @@ PROGRAM{
   $JettonData$_to_external PROCINLINE:<{
   }>
   $JettonDefaultWallet$init$_store PROCINLINE:<{
-    2SWAP
-    __tact_store_address INLINECALLDICT
-    ROT
+    -ROT
     __tact_store_address INLINECALLDICT
     SWAP
     __tact_store_address INLINECALLDICT
@@ -482,7 +480,7 @@ PROGRAM{
     CTOS
   }>
   $JettonDefaultWallet$_init_child PROCREF:<{
-    s0 s3 XCHG
+    s0 s2 XCHG
     CTOS
     LDDICT
     DROP
@@ -504,8 +502,7 @@ PROGRAM{
     FALSE
     SWAP
     1 STI
-    3 -ROLL
-    s0 s4 XCHG
+    s0 s0 s3 XCHG3
     $JettonDefaultWallet$init$_store INLINECALLDICT
     ENDC
   }>
@@ -518,7 +515,7 @@ PROGRAM{
   $SampleJetton$_fun_getJettonWalletInit PROCREF:<{
     __tact_context_sys GETGLOB
     MYADDR
-    s2 s0 s6 XC2PU
+    s1 s2 XCHG
     $JettonDefaultWallet$_init_child INLINECALLDICT
   }>
   $SampleJetton$_fun_mint PROCREF:<{
@@ -575,7 +572,7 @@ PROGRAM{
   $SampleJetton$_fun_get_jetton_data PROCREF:<{
     __tact_context_sys GETGLOB
     MYADDR
-    s5 s(-1) s0 PUXCPU
+    s5 s(-1) PUXC
     $JettonDefaultWallet$_init_child INLINECALLDICT
     $StateInit$_get_code INLINECALLDICT
     s5 s2 s(-2) PU2XC
@@ -585,7 +582,7 @@ PROGRAM{
   $SampleJetton$_fun_get_wallet_address PROCREF:<{
     __tact_context_sys GETGLOB
     MYADDR
-    s2 s0 s6 XC2PU
+    s1 s2 XCHG
     $JettonDefaultWallet$_init_child INLINECALLDICT
     $global_contractAddress INLINECALLDICT
   }>
@@ -717,7 +714,7 @@ PROGRAM{
     THROWANYIFNOT
     __tact_context_sys GETGLOB
     MYADDR
-    s3 s8 s(-1) PU2XC
+    s3 s(-1) PUXC
     $JettonDefaultWallet$_init_child INLINECALLDICT
     s0 s2 XCHG
     IF:<{

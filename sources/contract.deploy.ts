@@ -12,24 +12,23 @@ dotenv.config();
 (async () => {
     // create client for testnet sandboxv4 API - alternative endpoint
     const client4 = new TonClient4({
-        endpoint: "https://sandbox-v4.tonhubapi.com",
-        // endpoint: "https://mainnet-v4.tonhubapi.com",
+        endpoint: "https://sandbox-v4.tonhubapi.com", //testnet
+        // endpoint: "https://mainnet-v4.tonhubapi.com", //mainnet
     });
 
-    let mnemonics = (process.env.mnemonics_2 || "").toString(); // 🔴 Change to your own, by creating .env file!
+    let mnemonics = (process.env.mnemonics || "").toString(); // 🔴 Change to your own, by creating .env file!
     let keyPair = await mnemonicToPrivateKey(mnemonics.split(" "));
     let secretKey = keyPair.secretKey;
     let workchain = 0; //we are working in basechain.
     let deployer_wallet = WalletContractV4.create({ workchain, publicKey: keyPair.publicKey });
-    console.log(deployer_wallet.address);
 
     let deployer_wallet_contract = client4.open(deployer_wallet);
 
     const jettonParams = {
-        name: "JET",
-        description: "This is jetton of 5% commission to jetton owner",
-        symbol: "PTON",
-        image: "https://gateway.pinata.cloud/ipfs/QmdKpdkk4YgJnrruQVi7C6ocBAzZ1P3N5ZcRbjXihJYDeq",
+        name: "",
+        description: "",
+        symbol: "",
+        image: "",
     };
 
     // Create content Cell

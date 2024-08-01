@@ -1,6 +1,6 @@
 # 🚚 5% Commission Jetton
 
-This is Jetton of 5% commission for pucharge/sale
+This is Jetton of 5% commission for pucharge/sale from Ston.fi
 
 ### Usage
 
@@ -37,6 +37,7 @@ To deploy contract you should:
 
 1. Specify `contract.tact` that will be used as entry point of your contract
 2. Configure `contract.deploy.ts` according to your `contract.tact` to generate a deployment link. In particular, it is necessary to correctly call the Init() function from the contract.
+
 
 If you renamed `contract.tact` to something else, you need to update `tact.config.json` correspondingly. For more information , see [Tact Documentation](https://docs.tact-lang.org/language/guides/config)
 

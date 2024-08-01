@@ -91,7 +91,7 @@ _ $Context$_get_value((int, slice, int, slice) v) inline;
 (int, int, slice, cell, cell) $JettonData$_to_external(((int, int, slice, cell, cell)) v) inline;
 
 ;; $JettonDefaultWallet$init$_store
-builder $JettonDefaultWallet$init$_store(builder build_0, (slice, slice, slice) v) inline;
+builder $JettonDefaultWallet$init$_store(builder build_0, (slice, slice) v) inline;
 
 ;; $SampleJetton$init$_load
 (slice, ((slice, cell, int))) $SampleJetton$init$_load(slice sc_0) inline;
@@ -115,7 +115,7 @@ slice $global_contractAddress((cell, cell) $s) impure inline;
 slice $Cell$_fun_asSlice(cell $self) impure inline;
 
 ;; $JettonDefaultWallet$_init_child
-(cell, cell) $JettonDefaultWallet$_init_child(cell sys', slice $owner, slice $master, slice $jetton_owner) inline_ref;
+(cell, cell) $JettonDefaultWallet$_init_child(cell sys', slice $owner, slice $master) inline_ref;
 
 ;; $SendParameters$_constructor_to_value_bounce_mode_body_code_data
 ((int, slice, int, int, cell, cell, cell)) $SendParameters$_constructor_to_value_bounce_mode_body_code_data(slice to, int value, int bounce, int mode, cell body, cell code, cell data) inline;

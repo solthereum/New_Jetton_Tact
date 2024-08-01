@@ -22,7 +22,7 @@
 
 ((int, slice, cell, int, int), (cell, cell)) $SampleJetton$_fun_getJettonWalletInit((int, slice, cell, int, int) $self, slice $address) impure inline_ref {
     var (($self'total_supply, $self'owner, $self'content, $self'mintable, $self'max_supply)) = $self;
-    return (($self'total_supply, $self'owner, $self'content, $self'mintable, $self'max_supply), $JettonDefaultWallet$_init_child(__tact_context_sys, $address, my_address(), $self'owner));
+    return (($self'total_supply, $self'owner, $self'content, $self'mintable, $self'max_supply), $JettonDefaultWallet$_init_child(__tact_context_sys, $address, my_address()));
 }
 
 ((int, slice, cell, int, int), ()) $SampleJetton$_fun_mint((int, slice, cell, int, int) $self, slice $to, int $amount, slice $response_destination) impure inline_ref {
@@ -44,12 +44,12 @@
 
 ((int, slice, cell, int, int), (int, int, slice, cell, cell)) $SampleJetton$_fun_get_jetton_data((int, slice, cell, int, int) $self) impure inline_ref {
     var (($self'total_supply, $self'owner, $self'content, $self'mintable, $self'max_supply)) = $self;
-    return (($self'total_supply, $self'owner, $self'content, $self'mintable, $self'max_supply), $JettonData$_constructor_total_supply_mintable_owner_content_wallet_code($self'total_supply, $self'mintable, $self'owner, $self'content, $StateInit$_get_code($JettonDefaultWallet$_init_child(__tact_context_sys, $self'owner, my_address(), $self'owner))));
+    return (($self'total_supply, $self'owner, $self'content, $self'mintable, $self'max_supply), $JettonData$_constructor_total_supply_mintable_owner_content_wallet_code($self'total_supply, $self'mintable, $self'owner, $self'content, $StateInit$_get_code($JettonDefaultWallet$_init_child(__tact_context_sys, $self'owner, my_address()))));
 }
 
 ((int, slice, cell, int, int), slice) $SampleJetton$_fun_get_wallet_address((int, slice, cell, int, int) $self, slice $owner) impure inline_ref {
     var (($self'total_supply, $self'owner, $self'content, $self'mintable, $self'max_supply)) = $self;
-    return (($self'total_supply, $self'owner, $self'content, $self'mintable, $self'max_supply), $global_contractAddress($JettonDefaultWallet$_init_child(__tact_context_sys, $owner, my_address(), $self'owner)));
+    return (($self'total_supply, $self'owner, $self'content, $self'mintable, $self'max_supply), $global_contractAddress($JettonDefaultWallet$_init_child(__tact_context_sys, $owner, my_address())));
 }
 
 ((int, slice, cell, int, int), ()) $SampleJetton$_fun_requireOwner((int, slice, cell, int, int) $self) impure inline_ref {
@@ -118,7 +118,7 @@
     var ($self'total_supply, $self'owner, $self'content, $self'mintable, $self'max_supply) = $self;
     var ($msg'query_id, $msg'owner_address, $msg'include_address) = $msg;
     throw_unless(23951, ($Context$_get_value(__tact_context_get()) >= 6100000));
-    var ($init'code, $init'data) = $JettonDefaultWallet$_init_child(__tact_context_sys, $msg'owner_address, my_address(), $self'owner);
+    var ($init'code, $init'data) = $JettonDefaultWallet$_init_child(__tact_context_sys, $msg'owner_address, my_address());
     if ($msg'include_address) {
         $global_send($SendParameters$_constructor_to_value_mode_body(__tact_context_get_sender(), 0, 64, $TakeWalletAddress$_store_cell($TakeWalletAddress$_constructor_query_id_wallet_address_owner_address($msg'query_id, $global_contractAddress(($init'code, $init'data)), $Cell$_fun_asSlice(end_cell(__tact_store_address(__tact_store_bool(begin_cell(), true), $msg'owner_address)))))));
     } else {

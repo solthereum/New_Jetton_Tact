@@ -2512,10 +2512,10 @@
     decamelize-keys "2.0.1"
     ofetch "1.3.3"
 
-"@ston-fi/sdk@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.npmjs.org/@ston-fi/sdk/-/sdk-1.0.0.tgz"
-  integrity sha512-tOBE5j5MGvHlA8NxR1k86RUuyiEreatL3n8quHHkKo4EWiVIb2DpYWT+30gJgxxAdh8vtFf3QI7v79yDsMbk9Q==
+"@ston-fi/sdk@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.npmjs.org/@ston-fi/sdk/-/sdk-1.0.1.tgz"
+  integrity sha512-K1uXR3O/D5FwzAUyh/uqZjDZebtSYBx60AjBWMZdMyYN7Cf+/BO6ZRJawY/ybvdFiy79n8oIs9+dMaCcxbErPw==
 
 "@tact-lang/compiler@^1.2.0":
   version "1.4.0"
